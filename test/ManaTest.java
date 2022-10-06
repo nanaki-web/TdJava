@@ -12,9 +12,17 @@ public class ManaTest {
         // La clé décryptée que nous devrions obtenir
         String keyDecrypted = "CFfrkowl.aDzyS:eHjsGPZgMApWvRYVmtnK!BuU IQiEXTxbqhLdNJO,'c";
         // le test d'égalité entre la clé attendue et la sortie de la méthode de la librairie. Si le décryptage ne fonctionne pas nous aurons le message définit ici
-        Assertions.assertEquals(keyDecrypted, ManaBox.decrypt(keyCrypted));
-        StringUtils.stripAccents("école ééééèèèèèè");
-        StringUtils.stripAccents(keyCrypted);
+        Assertions.assertEquals(keyDecrypted, ManaBox.decrypt(keyCrypted),"La librairie de décryptage est mal installée");
+
+    }
+    @Test
+    public void accentTest() {
+
+       String avecAccent = "seul août arbore un accent circonflexe.";
+       String sansAccent = "seul aout arbore un accent circonflexe.";
+
+        Assertions.assertEquals(sansAccent, StringUtils.stripAccents(avecAccent));
+
 
     }
 }

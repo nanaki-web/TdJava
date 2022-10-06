@@ -18,17 +18,22 @@ public class Main {
 
         String encryptedString = ManaBox.encrypt(originalString);
         String decryptedString = ManaBox.decrypt(encryptedString);
-        String lissage = StringUtils.stripAccents(decryptedString);
+        String lissage = StringUtils.stripAccents(message);
 
         System.out.println("Message d'origine: ");
         System.out.println(originalString);
         System.out.println("_______________________________________________________");
         System.out.println("Message crypté: ");
-
         System.out.println(encryptedString);
+
         System.out.println("_______________________________________________________");
         System.out.println("Message décrypté: ");
+        System.out.println(decryptedString);
 
+        System.out.println("_______________________________________________________");
+        System.out.println("message origine");
+        System.out.println(message);
+        System.out.println("Message sans accents");
         System.out.println(lissage);
     }
 
