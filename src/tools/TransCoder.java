@@ -1,74 +1,38 @@
 package tools;
 
-import java.util.Collection;
+import org.germain.tool.ManaBox;
+
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.Set;
 
 public class TransCoder
         {
-                public static void main(String[] args) {
-                        Map<Character, String> decode = new Map<String,>() {
-                                @Override
-                                public int size() {
-                                        return 0;
-                                }
+                private Map<Character,String>encode;
+                private Map<String,Character>decode;
 
-                                @Override
-                                public boolean isEmpty() {
-                                        return false;
-                                }
+                public TransCoder(String cle)
+                {
+                        String decrypte = ManaBox.decrypt(cle);
+                        int taille = decrypte.length();
+                        char alpha = 'A';
+                        for (int i = 0; i < taille; i++) {
+                                char lettre = decrypte.charAt(i);
+                                System.out.println("tour "+i);
+                                System.out.println(lettre);
+                                System.out.println(alpha++);
+                                System.out.println("====================");
 
-                                @Override
-                                public boolean containsKey(Object key) {
-                                        return false;
-                                }
-
-                                @Override
-                                public boolean containsValue(Object value) {
-                                        return false;
-                                }
-
-                                @Override
-                                public String get(Object key) {
-                                        return null;
-                                }
-
-                                @Override
-                                public String put(Character key, String value) {
-                                        return null;
-                                }
-
-                                @Override
-                                public String remove(Object key) {
-                                        return null;
-                                }
-
-                                @Override
-                                public void putAll(Map<? extends Character, ? extends String> m) {
-
-                                }
-
-                                @Override
-                                public void clear() {
-
-                                }
-
-                                @Override
-                                public Set<Character> keySet() {
-                                        return null;
-                                }
-
-                                @Override
-                                public Collection<String> values() {
-                                        return null;
-                                }
-
-                                @Override
-                                public Set<Entry<Character, String>> entrySet() {
-                                        return null;
-                                }
                         }
+
                 }
+
+
+
+
+
+
+
+        }
 
             /*public String encode(String msg){
                 // méthode qui prend une string codée et qui renvoie
@@ -79,6 +43,11 @@ public class TransCoder
                 // méthode qui prend une string et qui renvoie
                 // une string codée
             }*/
-        }
 
 
+
+        /*char[] data = new char[52];
+                        for (int i = 0; i < 26; i++) {
+        data[i] = (char)(96 + (i/26)*6 + i);
+        System.out.println(data[i]);
+        }*/
