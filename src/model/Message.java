@@ -5,7 +5,7 @@ import tools.TransCoder;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class Message {
@@ -41,27 +41,53 @@ public class Message {
     }
     public void readNWriter()
     {
-        String home = System.getProperty("user.dir");
-
-        Path path = Paths.get(home, "unfichier.txt");
-
-        //on peut tester si le fichier existe
-        if (Files.exists(path))
+        if (encoded)
         {
-            System.out.println("le fichier existe déjà !!!");
-        } else
-        {
-            System.out.println("le fichier n'existe pas");
+            try {
+                this.msgEncodded = Files.readAllLines(msgEncodedPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("====== Décodage =====");
+            for(String ligne : msgEncodded){
+                //System.out.println(ligne);
+                String ligneDecoded = transCoder.decode(ligne);
+                System.out.println(ligneDecoded);
+                try {
+                    Files.writeString(msgClearPath, ligneDecoded + System.lineSeparator(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("Le message décodé se trouve: " + msgClearPath.toString());
+        } else {
+            try {
+                this.msgClear = Files.readAllLines(msgClearPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (String ligne : msgClear) {
+                //System.out.println(ligne);
+                String ligneEncoded = transCoder.encode(ligne);
+                try {
+                    Files.writeString(msgEncodedPath, (ligneEncoded + System.lineSeparator()), StandardOpenOption.CREATE,StandardOpenOption.APPEND);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("Le message encodé se trouve: " + msgEncodedPath.toString());
+
         }
-
-
-
-
-
-
-
-
-
     }
 
+
+
+
+
+
+
+
+
 }
+
+
